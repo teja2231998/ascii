@@ -1,0 +1,33 @@
+create table seed_name (seed_number int primary key identity (10500,1),seed_id int foreign key 
+references seed_area(seed_id),seed_name varchar(55))
+ insert into seed_name values(1,'basmathi')
+ insert into seed_name values(2,'nellore gilakara')
+ insert into seed_name values(1,'masura')
+ insert into seed_name values(2,'suger less')
+ select * from seed_name
+
+create table seed_cost (
+seed_number int foreign key references seed_name (seed_number),seed_cost int)
+
+insert into seed_cost values(10500,20000)
+insert into seed_cost values(10501,25000)
+insert into seed_cost values(10502,22000)
+insert into seed_cost values(10503,22500)
+select * from seed_cost
+
+create table seed_area (area_pincode int,seed_id int primary key
+,area_name varchar(55))
+insert into seed_area values(524346,1,'nellore')
+insert into seed_area values(524001,2,'nalgonda')
+select * from seed_area
+
+
+select seed_name.seed_name,seed_cost.seed_cost,seed_area.area_name,seed_area.area_pincode,
+seed_cost.seed_number from seed_name 
+inner join seed_area on seed_area.seed_id=seed_name.seed_id
+inner join seed_cost on seed_cost.seed_number=seed_name.seed_number
+where area_name= 'nellore'
+
+
+select seed_area.area_pincode as pincode,seed_name.seed_name as seedname from 
+seed_area,seed_name where seed_area.seed_id=seed_name.seed_id
